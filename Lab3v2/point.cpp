@@ -14,9 +14,14 @@ void point::draw(Color clr = Color::Black)
 		index = VisualMaster::adddot(x, y, clr);
 }
 
-int point::line(point& to, Color clr)
+int point::line(point& to, bool if1, bool if2, Color clr)
 {
-	return VisualMaster::addline(x, y, to.x, to.y, clr);
+	return VisualMaster::addline(x, y, if1, to.x, to.y, if2, clr);
+}
+
+int point::parabol(point& to, Color clr)
+{
+	return VisualMaster::addparabol(x, y, to.y, clr);
 }
 
 void point::hide()

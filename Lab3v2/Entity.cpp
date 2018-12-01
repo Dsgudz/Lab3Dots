@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #ifndef DotR
-#define DotR 3
+#define DotR 1
 #endif
 
 #include <cmath>
@@ -19,9 +19,13 @@ class Entity
 {
 public:
 	Entity() {}
+	~Entity() { delete[] vrtx; }
 
 	void set(int n, int* a, Color clr, RenderWindow *wind)
 	{
+		delete[] vrtx;
+		vrtx = new Vertex[6 * n*DotR*DotR];
+		long long debug = 6 * n*DotR*DotR;
 		window = wind;
 		s = 0;
 		for (int i = 0; i < n; i++)
@@ -55,5 +59,5 @@ public:
 private:
 	RenderWindow *window;
     long s;
-	Vertex vrtx[1000];// [100000];
+	Vertex *vrtx = new Vertex[1];
 };

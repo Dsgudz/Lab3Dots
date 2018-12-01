@@ -27,7 +27,12 @@ public:
 	void voronoy();
 
 
-
+	point raven[ndots*ndots];
+	int map[ndots*ndots][3];
+	bool checkmap[ndots];
+	int nraven = 0;
 	point arr[ndots];
+
+	point floorlvl;
 };
 

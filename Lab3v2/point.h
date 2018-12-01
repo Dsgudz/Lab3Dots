@@ -13,7 +13,7 @@ public:
 	void hide();
 	unsigned int getx() { return x; };
 	unsigned int gety() { return y; };
-	int line(point&, Color);
+	int line(point&, bool, bool, Color);
 	int parabol(point&, Color);
 private:
 	unsigned int x, y;

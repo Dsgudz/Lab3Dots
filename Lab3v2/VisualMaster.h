@@ -10,7 +10,7 @@ public:
 	static void redraw();
 	static void maintenance();
 
-	static int addline(int, int, int, int, Color); // REFACTOR, must be static int addline(int, int, bool, int, int, bool, Color);
+	static int addline(int, int, bool, int, int, bool, Color); // REFACTOR, must be static int addline(int, int, bool, int, int, bool, Color);
 	static int adddot(int, int, Color);
 	static int addparabol(int, int, int, Color);
 	static void remove(int);
