@@ -22,17 +22,18 @@ void LabMaster::voronoy()
 	for (int i = 1; i < ndots; i++)
 	{
 		checkmap[i] = true;
-		for (int j = 1; j < i; j++)
+		h = arr[i].gety();
+		for (int j = 0; j < i; j++)
 		{
-			h = arr[i].gety();
 			if (checkmap[j])
 			{
 				x1 = arr[j].getx();
 				y1 = arr[j].gety();
 				c1 = (h - y1) / 2;
 				a1 = 2 * (h - y1);
+				
 
-				for (int k = j; k < i; k++)
+				for (int k = j + 1; k < i; k++)
 					if (checkmap[k])
 					{
 						x2 = arr[k].getx();
@@ -47,11 +48,21 @@ void LabMaster::voronoy()
 							break;
 						}
 
-						
-						x = sqrt((c2 - c1) / (a1 - a2)); /// NO!
-						y = a1 * x * x + c1; /// NO!
+						{
+							float xm = (x1 + x2) / 2.f;
+							float ym = (y1 + y2) / 2.f;
+							float km = (x1 - x2) / float(y2 - y1);
+							float bm = ym - km * xm;
 
-						raven[dtsiter].set(x + x1, y + h);
+							double b = bm/2.f + km*km*h - km*km*y1 - km*x1;
+							double c = bm*bm - 2 * km*x1*bm + km*km*x1*x1 + km*km*h*h - km*km*y1*y1;
+
+							y = sqrt(b*b - c) - b;
+							x = (y + bm) / km;
+						}
+
+						
+						raven[dtsiter].set(x, y);
 						map[dtsiter][0] = i;
 						map[dtsiter][1] = j;
 						map[dtsiter][2] = k;
@@ -92,4 +103,21 @@ void LabMaster::sort()
 		for (int j = 1; j < ndots; j++)
 			if (arr[j - 1] > arr[j])
 				swap(arr[j - 1], arr[j]);
+}
+
+void LabMaster::start()
+{
+	VisualMaster::init();
+
+	sort();
+	voronoy();
+
+	for (int i = 0; i < ndots; i++)
+	{
+		arr[i].draw(Color::Yellow);
+	}
+	for (int i = 0; i < nraven; i++)
+	{
+		arr[i].draw(Color::Magenta);
+	}
 }

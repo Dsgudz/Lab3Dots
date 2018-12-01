@@ -17,22 +17,26 @@ using namespace std;
 
 int main()
 {
-	VisualMaster::init();
+	//VisualMaster::init();
 
-	point pt[20];
+	//point pt[20];
 	/*for(int i =0; i<20;i++)
 		for (int j = 0; j < 20; j++)
 		{*/
-			pt[0].set(600, 200);
+		/*	pt[0].set(600, 200);
 			pt[1].set(600, 700);
 			pt[2].set(700, 700);
 			pt[0].draw(Color::Black);
 			pt[0].parabol(pt[1], Color::Red);
 			pt[1].line(pt[2], true, true, Color::Green);
 			pt[1].draw(Color::Black);
-			pt[2].draw(Color::Black);
+			pt[2].draw(Color::Black);*/
 			
 		/*}*/
+
+	LabMaster lbmstr;
+
+	lbmstr.start();
 
 
 	while (VisualMaster::isopen())
