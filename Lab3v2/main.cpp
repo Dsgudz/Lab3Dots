@@ -17,26 +17,26 @@ using namespace std;
 
 int main()
 {
+	VisualMaster::init();
 	//VisualMaster::init();
 
-	//point pt[20];
-	/*for(int i =0; i<20;i++)
-		for (int j = 0; j < 20; j++)
-		{*/
-		/*	pt[0].set(600, 200);
-			pt[1].set(600, 700);
-			pt[2].set(700, 700);
-			pt[0].draw(Color::Black);
-			pt[0].parabol(pt[1], Color::Red);
-			pt[1].line(pt[2], true, true, Color::Green);
-			pt[1].draw(Color::Black);
-			pt[2].draw(Color::Black);*/
-			
-		/*}*/
+	float x, y;
+
+	point pt[20];
+		pt[0].set(100, 200);
+		pt[1].set(100, 400);
+		pt[2].set(150, 450);
+		findcenter(x,y, pt[0].getx(), pt[0].gety(), pt[1].getx(), pt[1].gety(), pt[2].getx(), pt[2].gety());
+		pt[3].set(x, y);
+		pt[0].draw(Color::Black);
+		pt[1].draw(Color::Black);
+		pt[2].draw(Color::Black);
+		pt[3].draw(Color::Magenta);
+	
 
 	LabMaster lbmstr;
 
-	lbmstr.start();
+	//lbmstr.start();
 
 
 	while (VisualMaster::isopen())

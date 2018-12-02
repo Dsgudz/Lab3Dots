@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #ifndef DotR
-#define DotR 1
+#define DotR 3
 #endif
 
 #include <cmath>

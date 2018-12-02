@@ -1,6 +1,8 @@
 #pragma once
 #include "point.h"
 
+void findcenter(float&,float&,float,float,float,float,float,float);
+
 const int ndots = 3;
 const int dots[ndots * 2] = {
 	/*0*/					200,100,
