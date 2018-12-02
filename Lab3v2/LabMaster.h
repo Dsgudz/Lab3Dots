@@ -3,13 +3,13 @@
 
 void findcenter(float&,float&,float,float,float,float,float,float);
 
-const int ndots = 3;
+const int ndots = 5;
 const int dots[ndots * 2] = {
 	/*0*/					550,550,
 	/*1*/					560,590,
 	/*2*/					750,600,
-	///*3*/					100,350,
-	///*4*/					900,650,
+	/*3*/					700,350,
+	/*4*/					800,650,
 	///*5*/					350,550,
 	///*6*/					600,200,
 	///*7*/					850,900,

@@ -9,7 +9,7 @@ LabMaster::LabMaster()
 	{
 		arr[i].set(dots[2*i], dots[2*i + 1]);
 		i++;
-		arr[i].draw(Color::Black);
+	//	arr[i].draw(Color::Black);
 	}
 }
 
@@ -154,8 +154,8 @@ void LabMaster::sort()
 
 void LabMaster::start()
 {
-	//sort();
-	//fortune();
+	sort();
+	fortune();
 
 	for (int i = 0; i < ndots; i++)
 	{
@@ -164,8 +164,8 @@ void LabMaster::start()
 	}
 	for (int i = 0; i < nraven; i++)
 	{
-		arr[i].draw(Color::Magenta);
-		std::cout << "Voron" << i << ",\nx= " << arr[i].getx() << ",\ny= " << arr[i].gety() << endl;
+		raven[i].draw(Color::Magenta);
+		std::cout << "Voron" << i << ",\nx= " << raven[i].getx() << ",\ny= " << raven[i].gety() << endl;
 	}
 }
 
