@@ -32,15 +32,127 @@ void findcenter(float& x0, float& y0, float x1, float y1, float x2, float y2, fl
 }
 
 
-void LabMaster::voronoy()
+void LabMaster::fortune()
 {
-	
+	int beach[ndots] = {};
+	int beachsize = 0;
+	int ready[ndots] = {};
+	int bestready = 1000;
+	int i;
+	float xtemp, ytemp;
+	int prev, that, next;
+
+	arr[ndots] = floorlvl;
+
+	for(int iter = 0; iter < ndots; iter++)
+	{
+		i = 0;
+		while ((i < beachsize) && (arr[beach[i]].getx() < arr[iter].getx()))
+			i++;
+
+
+		for (int j = beachsize; j > i; j--)
+		{
+			beach[j] = beach[j + 1];
+			ready[j] = ready[j + 1];
+		}
+
+		beachsize++;
+		beach[i] = iter;
+
+		prev = beach[i-1];
+		that = beach[i];
+		next = beach[i+1];
+
+		if ((i > 0) && (i < beachsize - 1))
+		{
+			prev = beach[i - 1];
+			that = beach[i];
+			next = beach[i + 1];
+			findcenter(xtemp, ytemp, arr[prev].getx(), arr[prev].gety(), arr[that].getx(), arr[that].gety(), arr[next].getx(), arr[next].gety());
+			ready[i] = ytemp;
+		}
+
+		if (i > 1)
+		{
+			prev = beach[i - 2];
+			that = beach[i - 1];
+			next = beach[i];
+			findcenter(xtemp, ytemp, arr[prev].getx(), arr[prev].gety(), arr[that].getx(), arr[that].gety(), arr[next].getx(), arr[next].gety());
+			ready[i - 1] = ytemp;
+		}
+
+		if (i < beachsize - 2)
+		{
+			prev = beach[i];
+			that = beach[i + 1];
+			next = beach[i + 2];
+			findcenter(xtemp, ytemp, arr[prev].getx(), arr[prev].gety(), arr[that].getx(), arr[that].gety(), arr[next].getx(), arr[next].gety());
+			ready[i + 1] = ytemp;
+		}
+
+		bestready = ready[1];
+
+		for (int i = 2; i < beachsize - 1; i++)
+			if (ready[i] < bestready)
+				bestready = ready[i];
+
+		while ((beachsize > 2) && (bestready < arr[iter + 1].gety()))
+		{
+			prev = beach[bestready - 1];
+			that = beach[bestready];
+			next = beach[bestready + 1];
+
+			findcenter(xtemp, ytemp, arr[prev].getx(), arr[prev].gety(), arr[that].getx(), arr[that].gety(), arr[next].getx(), arr[next].gety());
+			raven[nraven].set(xtemp, ytemp);
+			map[nraven][0] = prev;
+			map[nraven][1] = that;
+			map[nraven][2] = next;
+			nraven++;
+			
+			for (int j = bestready + 1; j < beachsize; j++)
+			{
+				beach[j] = beach[j - 1];
+				ready[j] = ready[j - 1];
+			}
+
+			if ((bestready > 0) && (bestready < beachsize - 1))
+			{
+				prev = beach[bestready - 1];
+				that = beach[bestready];
+				next = beach[bestready + 1];
+				findcenter(xtemp, ytemp, arr[prev].getx(), arr[prev].gety(), arr[that].getx(), arr[that].gety(), arr[next].getx(), arr[next].gety());
+				ready[bestready] = ytemp;
+			}
+
+			if (bestready > 1)
+			{
+				prev = beach[bestready - 2];
+				that = beach[bestready - 1];
+				next = beach[bestready];
+				findcenter(xtemp, ytemp, arr[prev].getx(), arr[prev].gety(), arr[that].getx(), arr[that].gety(), arr[next].getx(), arr[next].gety());
+				ready[bestready - 1] = ytemp;
+			}
+
+			if (bestready < beachsize - 2)
+			{
+				prev = beach[bestready];
+				that = beach[bestready + 1];
+				next = beach[bestready + 2];
+				findcenter(xtemp, ytemp, arr[prev].getx(), arr[prev].gety(), arr[that].getx(), arr[that].gety(), arr[next].getx(), arr[next].gety());
+				ready[bestready + 1] = ytemp;
+			}
+
+			bestready = ready[1];
+
+			for (int i = 2; i < beachsize - 1; i++)
+				if (ready[i] < bestready)
+					bestready = ready[i];
+		}
 
 
 
-
-
-
+	}
 
 
 
@@ -60,7 +172,7 @@ void LabMaster::sort()
 void LabMaster::start()
 {
 	sort();
-	voronoy();
+	fortune();
 
 	for (int i = 0; i < ndots; i++)
 	{

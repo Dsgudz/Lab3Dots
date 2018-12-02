@@ -27,14 +27,14 @@ public:
 	void start();
 
 	void sort();
-	void voronoy();
+	void fortune();
 
 
 	point raven[ndots*ndots];
 	int map[ndots*ndots][3];
 	bool checkmap[ndots];
 	int nraven = 0;
-	point arr[ndots];
+	point arr[ndots + 1];
 
 	point floorlvl;
 };
