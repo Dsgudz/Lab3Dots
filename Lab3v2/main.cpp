@@ -22,21 +22,20 @@ int main()
 
 	float x, y;
 
-	point pt[20];
-		pt[0].set(100, 200);
-		pt[1].set(100, 400);
-		pt[2].set(150, 450);
-		findcenter(x,y, pt[0].getx(), pt[0].gety(), pt[1].getx(), pt[1].gety(), pt[2].getx(), pt[2].gety());
-		pt[3].set(x, y);
+	/*point pt[20];
+		pt[0].set(550, 550);
+		pt[1].set(560, 590);
+		pt[2].set(750, 600);
+		pt[3].set(550, 550);
 		pt[0].draw(Color::Black);
 		pt[1].draw(Color::Black);
 		pt[2].draw(Color::Black);
-		pt[3].draw(Color::Magenta);
+		pt[3].draw(Color::Magenta);*/
 	
 
 	LabMaster lbmstr;
 
-	//lbmstr.start();
+	lbmstr.start();
 
 
 	while (VisualMaster::isopen())

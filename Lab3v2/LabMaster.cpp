@@ -1,10 +1,11 @@
 #include "LabMaster.h"
+#include <iostream>
 
 LabMaster::LabMaster()
 {
 	int i = 0;
 	floorlvl.set(1000, 1000);
-	while (i < 2*ndots)
+	while (i < ndots)
 	{
 		arr[i].set(dots[2*i], dots[2*i + 1]);
 		i++;
@@ -91,11 +92,11 @@ void LabMaster::fortune()
 			ready[i + 1] = ytemp;
 		}
 
-		bestready = ready[1];
+		bestready = 1;
 
 		for (int i = 2; i < beachsize - 1; i++)
-			if (ready[i] < bestready)
-				bestready = ready[i];
+			if (ready[i] < ready[bestready])
+				bestready = i;
 
 		while ((beachsize > 2) && (bestready < arr[iter + 1].gety()))
 		{
@@ -109,14 +110,15 @@ void LabMaster::fortune()
 			map[nraven][1] = that;
 			map[nraven][2] = next;
 			nraven++;
-			
+
 			for (int j = bestready + 1; j < beachsize; j++)
 			{
-				beach[j] = beach[j - 1];
-				ready[j] = ready[j - 1];
+				beach[j - 1] = beach[j];
+				ready[j - 1] = ready[j];
 			}
+			beachsize--;
 
-			if ((bestready > 0) && (bestready < beachsize - 1))
+			if (bestready < beachsize - 1)
 			{
 				prev = beach[bestready - 1];
 				that = beach[bestready];
@@ -133,32 +135,13 @@ void LabMaster::fortune()
 				findcenter(xtemp, ytemp, arr[prev].getx(), arr[prev].gety(), arr[that].getx(), arr[that].gety(), arr[next].getx(), arr[next].gety());
 				ready[bestready - 1] = ytemp;
 			}
-
-			if (bestready < beachsize - 2)
-			{
-				prev = beach[bestready];
-				that = beach[bestready + 1];
-				next = beach[bestready + 2];
-				findcenter(xtemp, ytemp, arr[prev].getx(), arr[prev].gety(), arr[that].getx(), arr[that].gety(), arr[next].getx(), arr[next].gety());
-				ready[bestready + 1] = ytemp;
-			}
-
 			bestready = ready[1];
 
 			for (int i = 2; i < beachsize - 1; i++)
 				if (ready[i] < bestready)
 					bestready = ready[i];
 		}
-
-
-
-	}
-
-
-
-
-
-	
+	}	
 }
 
 void LabMaster::sort()
@@ -171,15 +154,22 @@ void LabMaster::sort()
 
 void LabMaster::start()
 {
-	sort();
-	fortune();
+	//sort();
+	//fortune();
 
 	for (int i = 0; i < ndots; i++)
 	{
-		arr[i].draw(Color::Yellow);
+		arr[i].draw(Color::Black);
+		std::cout << "Dot" << i << ",\nx= " << arr[i].getx() << ",\ny= " << arr[i].gety() << endl;
 	}
 	for (int i = 0; i < nraven; i++)
 	{
 		arr[i].draw(Color::Magenta);
+		std::cout << "Voron" << i << ",\nx= " << arr[i].getx() << ",\ny= " << arr[i].gety() << endl;
 	}
+}
+
+void LabMaster::voronoy()
+{
+
 }

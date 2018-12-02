@@ -5,9 +5,9 @@ void findcenter(float&,float&,float,float,float,float,float,float);
 
 const int ndots = 3;
 const int dots[ndots * 2] = {
-	/*0*/					200,100,
-	/*1*/					550,850,
-	/*2*/					250,450,
+	/*0*/					550,550,
+	/*1*/					560,590,
+	/*2*/					750,600,
 	///*3*/					100,350,
 	///*4*/					900,650,
 	///*5*/					350,550,
@@ -28,6 +28,7 @@ public:
 
 	void sort();
 	void fortune();
+	void voronoy();
 
 
 	point raven[ndots*ndots];
